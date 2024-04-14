@@ -27,6 +27,9 @@ input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    border: 2px solid #ccc; /* Agregado para mejorar la visibilidad */
+    font-size: 16px; /* Aumento de tamaño de letra para facilitar la lectura */
+
 }
 
 button {
@@ -36,12 +39,44 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s; /* Suaviza la transición del color */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#score, #lives {
+#score, #lives, #timer { /* Añadido #timer para estilizar el temporizador */
     margin-top: 20px;
+    font-size: 18px; /* Aumento del tamaño de la fuente para mejor visibilidad */
+}
+#timer {
+    color: #d9534f; /* Color rojo para el temporizador, indicando urgencia */
+}
+#time-bar {
+    height: 10px;
+    background-color: #d9534f;
+    transition: width 1s linear; /* La transición podría ser innecesaria si actualizas la barra con frecuencia */
+    width: 100%;
+    position: relative; /* O absolute, dependiendo de tu diseño */
+}
+
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use la altura completa de la ventana gráfica */
+    background-color: #f3f3f3;
+}
+
+#menu h2 {
+    margin-bottom: 20px;
+}
+
+#menu button {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    /* Los demás estilos del botón pueden ser iguales a los que ya tienes */
 }

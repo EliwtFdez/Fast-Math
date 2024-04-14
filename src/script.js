@@ -10,47 +10,114 @@ const userAnswerElement = document.getElementById('user-answer');
 const submitButton      = document.getElementById('submit-answer');
 const scoreElement      = document.getElementById('score');
 const livesElement      = document.getElementById('lives');
+const timerElement      = document.getElementById('Timer');
 
-function startGame() {
+let currentAnswer; // Esta variable guarda la respuesta correcta actual
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.getElementById('menu');
+    const gameContainer = document.querySelector('.container');
+    const startButton = document.getElementById('start-game');
+    const howToPlayButton = document.getElementById('how-to-play');
+
+    gameContainer.style.display = 'none'; // Esconde el juego al principio
+
+    startButton.addEventListener('click', function() {
+        menu.style.display = 'none'; // Esconde el menú
+        gameContainer.style.display = 'block'; // Muestra el juego
+        startGame();
+    });
+
+    submitButton.addEventListener('click', function() {
+        checkAnswer(parseInt(userAnswerElement.value, 10), currentAnswer);
+    });
+
+
+    howToPlayButton.addEventListener('click', function() {
+        alert("You'll be presented with a random math question. " +
+              "Enter the correct answer and press 'Submit Answer' button. " +
+              "You have limited time for each question and limited lives. " +
+              "Try to score as high as you can!");
+    });
+});
+
+
+function startGame() 
+{
     askQuestion();
 }
 
+let currentInterval; // Esta variable almacena el intervalo actual para que puedas limpiarlo más tarde
+
 function askQuestion() {
-    const num1 = Math.floor(Math.random() * 10); // Número aleatorio del 0 al 9
-    const num2 = Math.floor(Math.random() * 10); // Número aleatorio del 0 al 9
+    // Primero, limpiamos cualquier intervalo existente antes de empezar uno nuevo
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
 
-    const operation = operations[Math.floor(Math.random() * operations.length)]; // Operación aleatoria
-
+    const num1 = Math.floor(Math.random() * 50); // Número aleatorio del 0 al 49
+    const num2 = Math.floor(Math.random() * 50); // Número aleatorio del 0 al 49
+    const operation = operations[Math.floor(Math.random() * operations.length)];
     const question = `${num1} ${operation} ${num2}`;
-    const answer = eval(question); 
+    const answer = Math.floor(eval(question)); // Evalúa la respuesta y redondea si es necesario
 
-    questionElement.textContent = `${question}`;
+    questionElement.textContent = question;
 
-    let timeout = setTimeout(() => {
-        lives--;
-        updateUI();
-        askQuestion();
-    }, timeLimit); 
+    const startTime = Date.now();
+    let timeLeft = timeLimit;
 
-    submitButton.onclick = function() {
-        clearTimeout(timeout); 
-        const userAnswer = parseInt(userAnswerElement.value);
-        if (!isNaN(userAnswer)) {
-            if (userAnswer === answer) {
-                score++;
-            } else {
-                lives--;
-            }
-            updateUI();
-            askQuestion();
-            userAnswerElement.value = '';
-        } else {
-            alert('Plis, Try Again.');
+    currentAnswer = Math.floor(eval(question)); // Asegúrate de que este eval no sea vulnerable a inyección de código
+    questionElement.textContent = question;
+
+
+    currentInterval = setInterval(() => {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTime;
+        timeLeft = timeLimit - elapsedTime;
+
+        document.getElementById('time-left').textContent = `${(timeLeft / 1000).toFixed(1)}s`;
+        document.getElementById('time-bar').style.width = `${(timeLeft / timeLimit) * 100}%`;
+
+        if (timeLeft <= 0) {
+            clearInterval(currentInterval);
+            document.getElementById('time-bar').style.width = '0%';
+            handleIncorrectAnswer();
         }
+    }, 100); // Actualización cada 100 ms para una animación suave
+}
+
+function handleIncorrectAnswer() {
+    lives--;
+    updateUI();
+    if (lives > 0) {
+        askQuestion(); // Solo pregunta de nuevo si el jugador todavía tiene vidas
     }
 }
 
-function updateUI() {
+function checkAnswer(userAnswer, correctAnswer) {
+    if (!isNaN(userAnswer)) {
+        if (userAnswer === correctAnswer) {
+            score++;
+            alert('Correct!');
+        } else {
+            handleIncorrectAnswer();
+        }
+        userAnswerElement.value = '';
+        updateUI();
+        askQuestion();
+    } else {
+        alert('Please enter a valid number.');
+    }
+}
+
+function handleIncorrectAnswer() {
+    lives--;
+    alert('Incorrect!');
+    updateUI();
+}
+
+function updateUI() 
+{
     scoreElement.textContent = `Score: ${score}`;
     livesElement.textContent = `Lives: ${lives}`;
     if (lives === 0) {
@@ -69,5 +136,6 @@ function resetGame() {
     updateUI();
     startGame();
 }
+
 
 startGame();
