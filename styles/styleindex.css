@@ -5,31 +5,9 @@ body {
     margin-top: 50px;
 }
 
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h1 {
-    margin-bottom: 20px;
-}
-
-#question {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #ccc; /* Agregado para mejorar la visibilidad */
-    font-size: 16px; /* Aumento de tamaño de letra para facilitar la lectura */
-
+    margin-bottom: 30px;
+    margin-top: 50px;
 }
 
 button {
@@ -41,24 +19,8 @@ button {
     cursor: pointer;
     transition: background-color 0.3s; /* Suaviza la transición del color */
 }
-
 button:hover {
     background-color: #0056b3;
-}
-
-#score, #lives, #timer { /* Añadido #timer para estilizar el temporizador */
-    margin-top: 20px;
-    font-size: 18px; /* Aumento del tamaño de la fuente para mejor visibilidad */
-}
-#timer {
-    color: #d9534f; /* Color rojo para el temporizador, indicando urgencia */
-}
-#time-bar {
-    height: 10px;
-    background-color: #d9534f;
-    transition: width 1s linear; /* La transición podría ser innecesaria si actualizas la barra con frecuencia */
-    width: 100%;
-    position: relative; /* O absolute, dependiendo de tu diseño */
 }
 
 
@@ -67,13 +29,18 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Use la altura completa de la ventana gráfica */
-    background-color: #f3f3f3;
+    height: 100vh;
+    background-color: #fff;
+
+    width: 100%; /* Esto asegura que el menú ocupe el ancho de la pantalla si es necesario */
+    max-width: 400px; /* Esto limita el ancho máximo del menú a 400px */
+    margin: auto; /* Esto centrará el menú en el medio de la pantalla */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(134, 90, 90, 0.1);
 }
 
-#menu h2 {
-    margin-bottom: 20px;
-}
+
 
 #menu button {
     padding: 10px 20px;

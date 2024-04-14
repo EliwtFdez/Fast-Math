@@ -1,0 +1,76 @@
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #007bff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+		color: #333;
+        text-align: center;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 10px 4px 10px rgba(0, 0, 0, 0.25);
+        width: 350px;
+        margin: 0 auto;
+    }
+    input[type="text"] {
+        width: 80%; /* O el porcentaje que prefieras para que no sea del 100% */
+        padding: 10px;
+        margin: 10px auto; /* Centra el input horizontalmente */
+        border: px solid #5c5959;
+        font-size: 20px;
+        display: block; /* Asegúrate de que el input se comporte como un bloque */
+
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom:  0px;
+    }
+
+    #question {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        font-size: 1.2em; /* Aumentar el tamaño de fuente para el botón */
+        font-weight: bold;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+
+
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #score, #lives, #timer { /* Añadido #timer para estilizar el temporizador */
+        margin-top: 20px;
+        font-size: 18px; /* Aumento del tamaño de la fuente para mejor visibilidad */
+    }
+    #timer {
+        color: #d9534f; /* Color rojo para el temporizador, indicando urgencia */
+    }
+    #time-bar {
+        height: 10px;
+        background-color: #d9534f;
+        transition: width 1s linear; /* La transición podría ser innecesaria si actualizas la barra con frecuencia */
+        width: 100%;
+        position: relative; /* O absolute, dependiendo de tu diseño */
+    }

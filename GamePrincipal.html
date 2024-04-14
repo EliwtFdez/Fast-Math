@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Aqui va a ir el juego prinicpal en funcion del boton start-game-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="/styles/styleGamePrincipal.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fasth Math</h1>
+        <div id="question"></div>
+        <input type="text" id="user-answer" placeholder="Write your answer">
+        <button id="submit-answer">answer</button>
+        <div id="score">Score: 0</div>
+        <div id="lives">Lives: 20</div>
+       <div id="timer">
+        Time: <span id="time-left">20.0s</span>
+        <div id="time-bar"></div> <!-- Nuevo elemento para la barra de progreso -->
+    </div>
+    
+    <script src="/src/scriptGame.js"></script>
+    
+</body>
+</html>
